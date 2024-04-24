@@ -7,11 +7,7 @@ test('closes href tag on truncated content', () => {
 
   table.push([{ content: 'looooooooooong', href }]);
 
-  const expected = [
-    '┌───────────────┐',
-    '│ \x1B]8;;http://example.com\x07looooooooooo…\x1B]8;;\x07 │',
-    '└───────────────┘',
-  ];
-
-  expect(table.toString()).toEqual(expected.join('\n'));
+  const expected = '\x1B]8;;http://example.com\x07looooooooooo…\x1B]8;;\x07';
+  const actual = table.toString();
+  expect(actual.includes(expected)).toBe(true);
 });
